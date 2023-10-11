@@ -27,6 +27,7 @@ Use CascadeType.REMOVE when you want to ensure that when the parent entity is re
 In many cases, you might use orphanRemoval in combination with other cascade types to achieve the desired behavior for both child entity removal and relationship removal.
 
 
+LAZY loading means that related entities are loaded only when you explicitly access them. This is typically a better choice for performance because it doesn't load related entities unless you need them
 
 
 

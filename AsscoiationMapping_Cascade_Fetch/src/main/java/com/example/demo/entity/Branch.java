@@ -4,6 +4,7 @@ import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,7 +22,8 @@ public class Branch {
 	private int id;
 	private String branchName;
 	
-	@OneToMany(cascade = {CascadeType.ALL},orphanRemoval = true)
+	@OneToMany(cascade = {CascadeType.ALL},orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "branch_id")
 	private Set<Accounts> accounts;
+	
 }

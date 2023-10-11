@@ -36,7 +36,7 @@ public class BranchServiceImpl implements BranchService {
 		 * //below line of code will cause the N+1 Problem return branchRepo.findAll();
 		 */
 
-		return branchRepo.findAllBranch();
+		return branchRepo.findAll();
 	}
 
 	@Override
