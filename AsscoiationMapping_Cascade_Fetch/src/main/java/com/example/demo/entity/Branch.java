@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class Branch {
 	private int id;
 	private String branchName;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL},orphanRemoval = true)
 	@JoinColumn(name = "branch_id")
 	private Set<Accounts> accounts;
 }

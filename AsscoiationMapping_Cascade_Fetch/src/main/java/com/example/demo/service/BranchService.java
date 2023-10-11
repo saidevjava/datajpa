@@ -16,4 +16,9 @@ public interface BranchService {
 	public Accounts createAccount(Accounts accounts);
 	
 	public Branch createBranch(Branch branch);
+	
+	public List<Branch> deleteBranch(int id);
+	
+	public List<Branch> deleteBranchWithOutCascade(int id);
+	
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -14,13 +15,13 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class BranchServiceImpl implements BranchService {
-	
+
 	private AccountsRepo accountsRepo;
 	private BranchRepo branchRepo;
-	
+
 	@Override
 	public Accounts fetchAccounts(int id) {
-		
+
 		return accountsRepo.findById(id).get();
 	}
 
@@ -32,13 +33,11 @@ public class BranchServiceImpl implements BranchService {
 	@Override
 	public List<Branch> fetchBranchAll() {
 		/*
-		 * //below line of code will cause the N+1 Problem 
-		 * return branchRepo.findAll();
+		 * //below line of code will cause the N+1 Problem return branchRepo.findAll();
 		 */
-		
+
 		return branchRepo.findAllBranch();
 	}
-	
 
 	@Override
 	public Accounts createAccount(Accounts accounts) {
@@ -54,6 +53,25 @@ public class BranchServiceImpl implements BranchService {
 		 */
 		Branch save = branchRepo.save(branch);
 		return save;
+	}
+
+	@Override
+	public List<Branch> deleteBranchWithOutCascade(int id) {
+
+		Branch branch = branchRepo.findById(id).get();
+		Set<Accounts> accounts = branch.getAccounts();
+		for (Accounts accounts2 : accounts) {
+			branch.getAccounts().remove(accounts2);
+		}
+		branchRepo.delete(branch);
+		return branchRepo.findAll();
+	}
+
+	@Override
+	public List<Branch> deleteBranch(int id) {
+		Branch branch = branchRepo.findById(id).get();
+		branchRepo.delete(branch);
+		return branchRepo.findAll();
 	}
 
 }
