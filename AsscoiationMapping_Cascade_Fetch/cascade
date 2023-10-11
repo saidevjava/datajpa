@@ -1,0 +1,34 @@
+Cascade is the feature provided by hibernate to automatically manage the state of mapped entity whenever the state of its relationship owner entity 	is affected. In other words, When relationship owner is saved,then associated mapped entity should also be saved and when relationship owner is deleted, 	associated mapped entity should also be deleted etc.
+
+Orphan removal is a feature in JPA (Java Persistence API) that allows you to automatically remove child entities when they are no longer associated with a parent entity. This is particularly useful in one-to-many or many-to-many relationships, where you want to ensure that orphaned child entities are deleted from the database when they are removed from the parent's collection.
+
+https://javatute.com/jpa/onetomany-orphanremoval-true-example-in-hibernate-jpa/
+
+With CascadeType.DETACH, when you detach a Parent, it will also detach its associated Child entities. Detaching an entity typically means it becomes detached from the persistence context, and changes are no longer tracked.
+
+orphanRemoval is a specific feature in JPA that is defined at the entity level.
+It is used to indicate that when a child entity is removed from the parent's collection, it should be automatically deleted from the database
+
+CascadeType.REMOVE is one of the cascade types specified in the @OneToOne or @OneToMany annotation.
+It indicates that when a parent entity is removed, it should also remove its associated child entities.
+  
+key Differences:
+
+orphanRemoval is more granular and specific to handling orphaned child entities when they are removed from the parent's collection. It focuses on the child entity's removal.
+
+CascadeType.REMOVE deals with the entire removal of the relationship. It not only removes orphaned child entities but also deletes all child entities when the parent entity is removed. It has a broader scope and might lead to unintended deletions if not used carefully.
+
+Use Cases:
+
+Use orphanRemoval when you want to ensure that child entities are deleted from the database as soon as they are removed from the parent's collection. This is useful when you want to track child entities' lifecycles closely.
+
+Use CascadeType.REMOVE when you want to ensure that when the parent entity is removed, all associated child entities are also removed. This is useful when you want to maintain a strong containment relationship between the parent and child entities, and you don't need to deal with orphaned child entities independently.
+
+In many cases, you might use orphanRemoval in combination with other cascade types to achieve the desired behavior for both child entity removal and relationship removal.
+
+
+
+
+
+
+
